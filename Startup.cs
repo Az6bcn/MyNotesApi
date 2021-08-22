@@ -37,6 +37,18 @@ namespace MyNotesApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyNotesApi", Version = "v1" });
             });
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("mypolicy",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200")
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod()
+                                             .AllowAnyOrigin();
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,9 +62,11 @@ namespace MyNotesApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyNotesApi v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("mypolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
