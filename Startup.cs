@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MyNotesApi.Services;
 
 namespace MyNotesApi
 {
@@ -49,6 +50,8 @@ namespace MyNotesApi
                                              .AllowAnyOrigin();
                                   });
             });
+
+            services.Configure<EmailServiceConfig>(Configuration.GetSection("EmailServiceConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
