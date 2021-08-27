@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MyNotesApi.GraphClient;
 using MyNotesApi.Services;
 
 namespace MyNotesApi
@@ -52,6 +53,10 @@ namespace MyNotesApi
             });
 
             services.Configure<EmailServiceConfig>(Configuration.GetSection("EmailServiceConfig"));
+
+            services.AddScoped<MicrosoftGraphClientAuthProvider>();
+
+            services.AddScoped<GraphClient.GraphClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
