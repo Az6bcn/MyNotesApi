@@ -32,7 +32,9 @@ namespace MyNotesApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
+                    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"))
+                    .EnableTokenAcquisitionToCallDownstreamApi()
+                    .AddInMemoryTokenCaches();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -54,9 +56,11 @@ namespace MyNotesApi
 
             services.Configure<EmailServiceConfig>(Configuration.GetSection("EmailServiceConfig"));
 
+            //services.AddScoped<ITokenAcquisition>();
             services.AddScoped<MicrosoftGraphClientAuthProvider>();
 
             services.AddScoped<GraphClient.GraphClient>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
