@@ -1,4 +1,4 @@
-namespace MyNotesApi.GraphClient
+namespace MyNotesApi.MicrosoftGraphClient
 {
     public class GraphApiSettings
     {

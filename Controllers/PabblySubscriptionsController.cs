@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Graph;
 using Microsoft.Identity.Web.Resource;
+using MyNotesApi.MicrosoftGraphClient;
 
 namespace MyNotesApi.Controllers
 {
@@ -15,10 +17,10 @@ namespace MyNotesApi.Controllers
     [Route("my-notes/api")]
     public class PabblySubscriptionsController : ControllerBase
     {
-        private GraphClient.GraphClient _graphClient;
+        private GraphClient _graphClient;
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public PabblySubscriptionsController(GraphClient.GraphClient graphClient,
+        public PabblySubscriptionsController(GraphClient graphClient,
                                              ILogger<WeatherForecastController> logger)
         {
             _graphClient = graphClient;
@@ -40,6 +42,18 @@ namespace MyNotesApi.Controllers
             // {
             //     //var user = 
             // }
+
+            IEnumerable<User> users;
+            try
+            {
+                var xx =  _graphClient.ServiceClient.Users;
+                users = await _graphClient.ServiceClient.Users.Request().GetAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
             return Ok();
         }
     }

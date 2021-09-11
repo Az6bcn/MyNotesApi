@@ -1,10 +1,11 @@
-using Microsoft.CodeAnalysis.Options;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 using Microsoft.Identity.Web;
 
 // https://cmatskas.com/create-a-protected-api-that-calls-in-ms-graph-on-behalf-of-a-power-app/
-namespace MyNotesApi.GraphClient
+namespace MyNotesApi.MicrosoftGraphClient
 {
     public class MicrosoftGraphClientAuthProvider
     {
@@ -26,10 +27,13 @@ namespace MyNotesApi.GraphClient
                 return _authProvider;
 
 
-            var provider = new DelegateAuthenticationProvider(async x =>
+            var provider = new DelegateAuthenticationProvider( x =>
             {
                 var accessToken
-                    = await Token.GetAccessTokenForAppAsync(_graphApiSettings.Scope, _graphApiSettings.TenantId);
+                    =  Token.GetAccessTokenForAppAsync(_graphApiSettings.Scope).Result;
+
+                x.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                return null;
             });
 
             return provider;
