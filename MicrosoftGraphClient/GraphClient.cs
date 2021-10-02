@@ -16,16 +16,16 @@ namespace MyNotesApi.MicrosoftGraphClient
                 if (_graphServiceClient is not null)
                     return _graphServiceClient;
                 
-                _graphServiceClient = new GraphServiceClient(AuthenticationProvider.GetProvider());
+                _graphServiceClient = new GraphServiceClient(TokenCredentialProvider.GetProvider());
                 return _graphServiceClient;
             }
         }
 
-        public MicrosoftGraphClientAuthProvider AuthenticationProvider { get; }
+        public MicrosoftGraphClientTokenCredentialProvider TokenCredentialProvider { get; }
 
-        public GraphClient(MicrosoftGraphClientAuthProvider authProvider)
+        public GraphClient(MicrosoftGraphClientTokenCredentialProvider tokenCredentialProvider)
         {
-            AuthenticationProvider = authProvider;
+            TokenCredentialProvider = tokenCredentialProvider;
         }
     }
 }

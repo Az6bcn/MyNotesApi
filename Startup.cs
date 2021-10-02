@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MyNotesApi.MicrosoftGraphClient;
 using MyNotesApi.Services;
@@ -32,12 +33,7 @@ namespace MyNotesApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"))
-                    .EnableTokenAcquisitionToCallDownstreamApi(opt =>
-                    {
-                        opt.ClientSecret = Configuration.GetSection("GraphAPISettings:Secret").Value;
-                    })
-                    .AddInMemoryTokenCaches();
+                    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2CSettings"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -58,9 +54,9 @@ namespace MyNotesApi
             });
 
             services.Configure<EmailServiceConfig>(Configuration.GetSection("EmailServiceConfig"));
-            services.Configure<GraphApiSettings>(Configuration.GetSection("GraphAPISettings"));
+            services.Configure<AzureAdB2CSettings>(Configuration.GetSection("AzureAdB2CSettings"));
 
-            services.AddScoped<MicrosoftGraphClientAuthProvider>();
+            services.AddScoped<MicrosoftGraphClientTokenCredentialProvider>();
 
             services.AddScoped<GraphClient>();
 
