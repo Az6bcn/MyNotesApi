@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 using Microsoft.Identity.Web.Resource;
 using MyNotesApi.MicrosoftGraphClient;
+using MyNotesApi.Models;
 
 namespace MyNotesApi.Controllers
 {
@@ -28,39 +29,16 @@ namespace MyNotesApi.Controllers
         }
 
         [HttpPost("subscription-created")]
-        public async Task<IActionResult> SubscriptionCreated([FromBody] JsonElement value)
+        public async Task<IActionResult> SubscriptionCreated([FromBody] JsonElement message)
         {
-            // var eventType = value.event_type;
-            // var plan = value.data.plan.plan_name;
-            // var planCode = value.data.plan.plan_code;
-            // var customerEmail = value.data.email_id;
-            // var customerId = value.data.customer_id;
-            // var trialExpiryDay = value.data.trial_expiry_date;
-            
-            // call microsoft graph
-            // if (eventType == "subscription_create")
-            // {
-            //     //var user = 
-            // }
+            var dto = new WebHookSubscriptionCreatedDto();
+            dto.TryGetPropertyValues(message);
 
-            IEnumerable<User> users;
-            try
-            {
-                var xx =  _graphClient.ServiceClient.Users;
-                users = await _graphClient.ServiceClient.Users.Request().GetAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            var users = await _graphClient.ServiceClient.Users.Request().GetAsync();
+            
+            //users.Where(x => x.FI)
             
             return Ok();
         }
-    }
-
-    public  class WebHookDto
-    {
-        public string event_type { get; set; }
-        public object plan { get; set; }
     }
 }
