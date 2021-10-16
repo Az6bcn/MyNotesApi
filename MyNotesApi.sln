@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNotesApi", "MyNotesApi.csproj", "{BC1B7A1A-691A-42DB-B8D4-C097B911535C}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyNotesApi", "MyNotesApi.csproj", "{BC1B7A1A-691A-42DB-B8D4-C097B911535C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "..\Database\Database.sqlproj", "{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,17 @@ Global
 		{BC1B7A1A-691A-42DB-B8D4-C097B911535C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC1B7A1A-691A-42DB-B8D4-C097B911535C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC1B7A1A-691A-42DB-B8D4-C097B911535C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B593E3A-B56A-46F5-AF6F-541A21BFD4CA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B933E27-5147-491E-9819-E273C15B44A0}
 	EndGlobalSection
 EndGlobal
