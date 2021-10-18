@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MyNotesApi.MicrosoftGraphClient;
-using MyNotesApi.Models;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Models;
+using MyNotesApi.MicrosoftGraphClient;
+using System.Text.Json;
 
 namespace MyNotesApi.Controllers
 {
