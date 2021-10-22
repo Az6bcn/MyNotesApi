@@ -10,26 +10,39 @@ public class SubscriptionMappings : IEntityTypeConfiguration<Subscription>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Id).UseIdentityColumn().HasColumnType("int").ValueGeneratedOnAdd().IsRequired();
+        builder.Property(p => p.Id)
+               .UseIdentityColumn()
+               .HasColumnType("int")
+               .ValueGeneratedOnAdd()
+               .IsRequired();
+
         builder.Property(p => p.Currency)
                .HasColumnType("varchar(50)")
                .IsUnicode(true)
                .ValueGeneratedNever()
                .IsRequired();
+
         builder.Property(p => p.Email)
                .HasColumnType("varchar(50)")
                .IsUnicode(true)
                .ValueGeneratedNever()
                .IsRequired();
+
         builder.Property(p => p.SubscriptionId)
                .HasColumnType("varchar(50)")
                .IsUnicode(false)
                .ValueGeneratedNever()
                .IsRequired();
-        builder.Property(p => p.TrialExpired)
-               .HasColumnType("datetime2")
+
+        builder.Property(p => p.CustomerId)
+               .HasColumnType("varchar(50)")
+               .IsUnicode(false)
                .ValueGeneratedNever()
                .IsRequired();
 
+        builder.Property(p => p.TrialExpired)
+               .HasColumnType("datetimeoffset(7)")
+               .ValueGeneratedNever()
+               .IsRequired();
     }
 }

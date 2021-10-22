@@ -7,7 +7,7 @@ namespace DataAccess;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<Subscription> Subscriptions { get; set; }
-
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
